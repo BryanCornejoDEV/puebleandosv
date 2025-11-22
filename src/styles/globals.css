@@ -1,0 +1,24 @@
+/* Animaciones y utilidades globales adicionales */
+
+@keyframes marquee {
+	0% { transform: translateX(0); }
+	100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+	animation: marquee 25s linear infinite;
+}
+
+@keyframes pulse-slow {
+	0%, 100% { opacity: 1; }
+	50% { opacity: .4; }
+}
+
+.animate-pulse-slow {
+	animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+::selection {
+	background: #008744;
+	color: #ffffff;
+}

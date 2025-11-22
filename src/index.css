@@ -1,0 +1,98 @@
+@import "tailwindcss";
+
+@theme { /* --- Paleta de Colores --- */ 
+--color-primary: #008744; --color-dark: #024522;
+--color-accent: #004421; --color-white: #ffffff; 
+/* --- Tipografía --- */ 
+--font-sans: "Inter", system-ui, sans-serif; 
+/* --- Breakpoints personalizados --- */
+--breakpoint-xs: 360px; /* móviles muy pequeños */
+--breakpoint-mobile: 480px; /* móviles estándar */
+--breakpoint-tv: 1920px; /* pantallas TV / Full HD */
+--breakpoint-4k: 2560px; /* pantallas 4K grandes */
+/* --- Animaciones Personalizadas --- */ 
+--animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+--animate-marquee: marquee 25s linear infinite; 
+@keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }}
+/* Estilos globales */
+body { font-family: var(--font-sans); color: var(--color-dark);
+background-color: var(--color-white);
+}
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #008744;
+  text-decoration: inherit;
+}
+a:hover {
+  color: #004421;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  display: block;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+/* Reset básico botones (Tailwind ya maneja estilos específicos) */
+button { font: inherit; }
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
+/* --- Ajustes Mobile Pequeño (hasta 480px) --- */
+@media (max-width: 480px) {
+  h1 { font-size: 2.2rem; }
+  .hero-title { font-size: clamp(2.4rem, 9vw, 2.8rem); }
+  .hero-sub { font-size: 0.95rem; }
+  .hero-actions button { width: 100%; }
+}
+
+/* --- Ajustes Tablet (>=768px) se heredan vía utilidades Tailwind --- */
+
+/* --- Ajustes Pantalla TV (>=1920px) --- */
+@media (min-width: 1920px) {
+  :root { font-size: 18px; }
+  .hero-title { font-size: clamp(5rem,6vw,7rem); }
+  .hero-sub { font-size: 1.35rem; max-width: 60rem; }
+  .hero-actions button { padding: 1.1rem 3rem; font-size: 1.25rem; }
+  .hero-wrapper { padding-top: 11rem; padding-bottom: 6rem; }
+}
+
+/* --- Ajustes Pantalla 4K (>=2560px) --- */
+@media (min-width: 2560px) {
+  :root { font-size: 20px; }
+  .hero-title { font-size: clamp(6rem,5vw,8rem); }
+  .hero-wrapper { padding-top: 13rem; }
+}
