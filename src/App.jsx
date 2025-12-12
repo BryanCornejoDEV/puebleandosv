@@ -1,18 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import Navbar from './components/layout/Navbar';
 import Footer from './components/layout/Footer';
-import Hero from './pages/home/Hero';
-import BentoGrid from './pages/home/BentoGrid';
-import InfoStrip from './pages/home/InfoStrip';
+
+import Home from './pages/home';
+import Explorar from './pages/explorar';
+import Destinos from './pages/destinos';
+import Nosotros from './pages/nosotros';
+import Precios from './pages/precios';
 
 function App() {
+  const [path, setPath] = useState(window.location.pathname || '/');
+
+  useEffect(() => {
+    const onPop = () => setPath(window.location.pathname || '/');
+    window.addEventListener('popstate', onPop);
+    return () => window.removeEventListener('popstate', onPop);
+  }, []);
+
+  const navigate = useCallback((to) => {
+    if (to === path) return;
+    window.history.pushState({}, '', to);
+    setPath(to);
+  }, [path]);
+
+  const renderRoute = () => {
+    switch (path) {
+      case '/explorar':
+        return <Explorar />;
+      case '/destinos':
+        return <Destinos />;
+      case '/nosotros':
+        return <Nosotros />;
+      case '/precios':
+        return <Precios />;
+      case '/':
+      case '/home':
+      default:
+        return <Home />;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900 selection:bg-primary selection:text-white">
-      <Navbar />
+      <Navbar onNavigate={navigate} currentPath={path} />
       <main>
-        <Hero />
-        <BentoGrid />
-        <InfoStrip />
+        {renderRoute()}
       </main>
       <Footer />
     </div>
