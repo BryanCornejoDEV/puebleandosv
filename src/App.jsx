@@ -26,17 +26,17 @@ function App() {
   const renderRoute = () => {
     switch (path) {
       case '/explorar':
-        return <Explorar />;
+        return <Explorar onNavigate={navigate} />;
       case '/destinos':
-        return <Destinos />;
+        return <Destinos onNavigate={navigate} />;
       case '/nosotros':
-        return <Nosotros />;
+        return <Nosotros onNavigate={navigate} />;
       case '/precios':
-        return <Precios />;
+        return <Precios onNavigate={navigate} />;
       case '/':
       case '/home':
       default:
-        return <Home />;
+        return <Home onNavigate={navigate} />;
     }
   };
 

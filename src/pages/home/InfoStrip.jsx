@@ -11,7 +11,7 @@ const InfoStrip = () => (
               className="text-4xl md:text-6xl font-bold text-transparent font-sans tracking-tighter"
               style={{ WebkitTextStroke: '1px rgba(255, 255, 255, 0.2)' }}
             >
-              EXPLORA SIN LÍMITES
+              DONDE TUS SUEÑOS SE HACEN REALIDAD
             </span>
             <Wind className="text-primary w-12 h-12" />
           </React.Fragment>
