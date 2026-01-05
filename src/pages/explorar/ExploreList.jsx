@@ -1,15 +1,26 @@
 import React from 'react';
 
 const DummyCard = ({ title, subtitle, image }) => (
-  <div className="bg-black/30 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-200 hover:scale-105 motion-reduce:transform-none animate-fade-up flex h-full min-w-0">
-    <div className="w-36 md:w-44 h-full relative flex-shrink-0 min-w-0">
-      <img src={image} alt={title} loading="lazy" className="w-full h-full object-cover" />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 to-transparent" />
+  <div className="relative rounded-2xl overflow-hidden shadow-2xl transform transition-all duration-200 hover:scale-105 motion-reduce:transform-none animate-fade-up border border-white/10">
+    <img src={image} alt={title} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+
+    {/* Overlay: blurred bottom half with faded transition using CSS mask for a smooth fade */}
+    <div className="absolute inset-0 pointer-events-none">
+      <div
+        className="absolute inset-0 backdrop-blur-md bg-black/20"
+        style={{
+          WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)',
+          maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 100%)'
+        }}
+      />
     </div>
 
-    <div className="p-6 flex-1 text-white h-full flex flex-col justify-center min-w-0">
-      <h3 className="text-lg font-semibold">{title}</h3>
-      <p className="text-sm text-white/80 mt-3">{subtitle}</p>
+    {/* Content over the image */}
+    <div className="relative z-10 p-6 flex flex-col justify-end h-56 md:h-64 lg:h-72">
+      <div className="max-w-[85%] bg-white/5 backdrop-blur-sm border border-white/20 rounded-xl p-4">
+        <h3 className="text-white text-lg font-semibold">{title}</h3>
+        <p className="text-sm text-white/80 mt-2">{subtitle}</p>
+      </div>
     </div>
   </div>
 );
@@ -27,8 +38,8 @@ const ExploreList = () => {
   ];
 
   return (
-    <div className="relative z-10 w-full px-6">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 auto-rows-fr">
+    <div className="relative z-10 w-full px-6 pb-8 md:pb-16">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {items.map((it, i) => (
             <DummyCard key={i} title={it.title} subtitle={it.subtitle} image={it.image} />
         ))}
