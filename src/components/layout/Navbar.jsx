@@ -15,6 +15,7 @@ const NavLink = ({ children, active, to, onNavigate }) => (
 
 const Navbar = ({ onNavigate = () => {}, currentPath = '/' }) => {
   const [open, setOpen] = useState(false);
+  const [showReserveHint, setShowReserveHint] = useState(false);
 
   return (
     <nav className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-5xl">
@@ -43,8 +44,21 @@ const Navbar = ({ onNavigate = () => {}, currentPath = '/' }) => {
         </div>
 
         {/* Botón reserva escritorio */}
-        <button className="hidden md:flex bg-dark text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-primary transition-colors items-center gap-2">
+        <button
+          className="hidden md:flex bg-dark text-white px-5 py-2 rounded-full text-sm font-medium hover:bg-primary transition-colors items-center gap-2 relative cursor-not-allowed"
+          onMouseEnter={() => setShowReserveHint(true)}
+          onMouseLeave={() => setShowReserveHint(false)}
+          onFocus={() => setShowReserveHint(true)}
+          onBlur={() => setShowReserveHint(false)}
+          aria-describedby="reserve-hint"
+        >
           Reservar <ArrowUpRight size={14} />
+
+          {showReserveHint && (
+            <div id="reserve-hint" role="status" className="absolute -left-15 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-1 rounded-full shadow">
+              Próximamente!
+            </div>
+          )}
         </button>
 
         {/* Botón menú móvil */}
@@ -59,8 +73,21 @@ const Navbar = ({ onNavigate = () => {}, currentPath = '/' }) => {
             <NavLink to="/destinos" onNavigate={onNavigate} active={currentPath === '/destinos'}>Destinos</NavLink>
             <NavLink to="/nosotros" onNavigate={onNavigate} active={currentPath === '/nosotros'}>Nosotros</NavLink>
             <NavLink to="/precios" onNavigate={onNavigate} active={currentPath === '/precios'}>Precios</NavLink>
-            <button className="bg-dark text-white w-full px-5 py-3 rounded-full text-sm font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2">
+            <button
+              className="bg-dark text-white w-full px-5 py-3 rounded-full text-sm font-medium hover:bg-primary transition-colors flex items-center justify-center gap-2 relative cursor-not-allowed"
+              onMouseEnter={() => setShowReserveHint(true)}
+              onMouseLeave={() => setShowReserveHint(false)}
+              onFocus={() => setShowReserveHint(true)}
+              onBlur={() => setShowReserveHint(false)}
+              aria-describedby="reserve-hint-mobile"
+            >
               Reservar <ArrowUpRight size={16} />
+
+              {showReserveHint && (
+                <div id="reserve-hint-mobile" role="status" className="absolute -top-12 left-1/2 transform -translate-x-1/2 bg-black/90 text-white text-xs px-3 py-1 rounded-full shadow">
+                  Próximamente: Reservar
+                </div>
+              )}
             </button>
           </div>
         )}
